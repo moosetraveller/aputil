@@ -4,7 +4,7 @@ method to use field names instead of column indices.
 
 ```python
 import arcpy
-from arcpyutil.xcursor import xcursor
+from arcpyutil import xcursor
 
 feature_class = "points.shp"
 with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:

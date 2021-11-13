@@ -25,7 +25,7 @@ import arcpy
 import unittest
 import tempfile
 
-from src.arcpyutil.xcursor import xcursor
+from src.arcpyutil import xcursor
 
 class XCursorTest(unittest.TestCase):
     """ Unit test to validate functionality of xcursor. """

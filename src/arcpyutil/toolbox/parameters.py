@@ -4,7 +4,7 @@ name. In addition, `ToolParameters` offers some helper functions.
 
 ```python
 import arcpy
-from arcpyuti.toolbox.parameters import ToolParameters
+from arcpyuti.toolbox import ToolParameters
 
 params = ToolParameters(arcpy.GetParameterInfo())
 
@@ -37,45 +37,27 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import abc
 import arcpy
 
-from typing import Union, List, TypeVar, Dict
+from typing import Union, List, Dict
 
-P = TypeVar("P")
-
-
-class Parameters(abc.ABC):
-
-    def get(self, name: str) -> Union[P, None]:
-        raise NotImplementedError("Please instanciate a concreate class of Parameters")
-
-    def get_params(self) -> List[P]:
-        raise NotImplementedError("Please instanciate a concreate class of Parameters")
-
-    def get_string(self, name: str, default_value: Union[str, None] = None) -> Union[str, None]:
-        raise NotImplementedError("Please instanciate a concreate class of Parameters")
-
-    def get_int(self, name: str, default_value: Union[int, None] = None) -> Union[int, None]:
-        raise NotImplementedError("Please instanciate a concreate class of Parameters")
-
-    def get_float(self, name: str, default_value: Union[float, None] = None) -> Union[float, None]:
-        raise NotImplementedError("Please instanciate a concreate class of Parameters")
-
-    def get_bool(self, name: str, default_value: Union[bool, None] = False) -> Union[bool, None]:
-        raise NotImplementedError("Please instanciate a concreate class of Parameters")
+class ToolParameters:
+    """
+    Wraps a list of `arcpy.Parameter`s and allows to index the parameter
+    by name. Example usage:
     
-    def has_value(self, name: str) -> bool:
-        raise NotImplementedError("Please instanciate a concreate class of Parameters")
+    ```python
+    import arcpy
+    from arcpyuti.toolbox import ToolParameters
 
-    def get_multivalue(self) -> List[str]:
-        raise NotImplementedError("Please instanciate a concreate class of Parameters")
+    params = ToolParameters(arcpy.GetParameterInfo())
 
-    def clear_messages(self) -> None:
-        raise NotImplementedError("Please instanciate a concreate class of Parameters")
-
-
-class ToolParameters(Parameters):
+    feature_class = params.get_string("feature_class")  # retrieve string
+    count = params.get_int("count")  # retrieve integer
+    distance = params.get_float("distance")  # retrieve float
+    # and so on
+    ```
+    """
 
     def __init__(self, parameters: List[arcpy.Parameter] = None, suppress_errors = True):
         """ If `suppress_errors` is `False`, raises errors if a parameter does not
@@ -172,10 +154,11 @@ class ToolParameters(Parameters):
         parameter = self.parameters.get(name)
         return parameter and parameter.value is not None
     
-    def get_multivalue(self) -> List[str]:
-        parameter = self.get_string()
+    def get_multivalue(self, name: str) -> List[str]:
+        parameter = self.get_string(name)
         return parameter.split(";") if parameter else None
 
     def clear_messages(self) -> None:
+        """ Clears all messages at once. """
         for param in self.get_params():
             param.clearMessage()

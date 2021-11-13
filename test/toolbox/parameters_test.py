@@ -28,7 +28,7 @@ import tempfile
 
 from arcpy.arcobjects.arcobjects import Value
 
-from src.arcpyutil.toolbox.parameters import ToolParameters
+from src.arcpyutil.toolbox import ToolParameters
 
 class ToolParametersTest(unittest.TestCase):
     """ Unit test to validate functionality of `ToolParameters`. """
@@ -131,6 +131,11 @@ class ToolParametersTest(unittest.TestCase):
         self.assertRaises(ValueError, params.get_float, "checkbox_false")
 
         self.assertIsNone(params.get_float("checkbox_undefined"))
+        
+    def test_multivalue(self):
+        
+        param = ToolParameters(self.parameter_info)
+        # TODO
 
 def run_tests():
 
@@ -138,6 +143,7 @@ def run_tests():
     suite.addTest(ToolParametersTest("test"))
     suite.addTest(ToolParametersTest("test_iterator"))
     suite.addTest(ToolParametersTest("test_errors"))
+    suite.addTest(ToolParametersTest("test_multivalue"))
 
     runner = unittest.TextTestRunner()
     runner.run(suite)
