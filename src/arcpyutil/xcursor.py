@@ -86,6 +86,18 @@ class XRow():
 
 
 def xcursor(cursor):
-    """ Generator wrapping an arcpy cursor providing XRow instances. """
+    """
+    Generator wrapping an arcpy cursor providing XRow instances.
+    
+    ```python
+    import arcpy
+    from arcpyutil import xcursor
+
+    feature_class = "points.shp"
+    with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:
+        for row in xcursor(cursor):
+            print(row["FieldName"]) # instead of row[0]
+    ```
+    """
     for row in cursor:
         yield XRow(row, cursor.fields)
