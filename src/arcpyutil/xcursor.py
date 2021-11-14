@@ -35,18 +35,19 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import arcpy
+from typing import List, Dict, Union, Generator
 
+import arcpy
 
 class XRow():
     """ Wraps an arcpy cursor row. """
 
-    def __init__(self, row, fields):
+    def __init__(self, row: List[any], fields: List[str]):
         self.row = row
         self.fields = fields
         self._fields = {field_name.upper(): index for index, field_name in enumerate(fields)}
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: Union[str, int]):
         if isinstance(index, int):
             return self.get_by_index(index)
         return self.get(index)
@@ -54,7 +55,7 @@ class XRow():
     def __repr__(self):
         return "xcursor.XRow({}, {})".format(str(self.row), str(self.fields))
 
-    def get(self, field_name, default_value=None):
+    def get(self, field_name: str, default_value: any = None):
         """
         Gets the field value for given field.
         In addition to just using ["FieldName"], this method can
@@ -67,7 +68,7 @@ class XRow():
             return default_value
         return value
 
-    def get_by_index(self, index, default_value=None):
+    def get_by_index(self, index: int, default_value: any = None):
         """
         Gets the field value for given index.
         In addition to just using [index], this method can
@@ -80,12 +81,12 @@ class XRow():
             return default_value
         return value
 
-    def to_dict(self):
+    def to_dict(self) -> Dict[str, List[any]]:
         """ Returns a dictionary representation. """
         return {field_name: value for field_name, value in zip(self._fields, self.row)}  # pylint: disable=unnecessary-comprehension
 
 
-def xcursor(cursor):
+def xcursor(cursor: arcpy.da.SearchCursor) -> Generator[XRow, None, None]:
     """
     Generator wrapping an arcpy cursor providing XRow instances.
     

@@ -21,12 +21,9 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import os
 import arcpy
 import unittest
 import tempfile
-
-from arcpy.arcobjects.arcobjects import Value
 
 from src.arcpyutil.toolbox import ToolParameters
 
