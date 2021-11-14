@@ -1,4 +1,6 @@
 """
+Various helper functions.
+
 GIT Repository:
 https://github.com/moosetraveller/arcpy-util
 
@@ -22,5 +24,15 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .xcursor import xcursor, XRow
-from .helper import FeatureClassType, count
+from typing import Union, TypeVar
+
+FeatureClassType = TypeVar("FeatureClassType")  # for documenting reason only
+
+import arcpy
+
+
+def count(feature_class: Union[str, FeatureClassType]) -> int:
+    """ Returns the numbers of features in given feature class as an int value.
+        Introduced to overcome dealing with `arcpy.management.GetCount`'s
+        return value of type `arcpy.arcobjects.arcobjects.Result`."""
+    return int(arcpy.management.GetCount(feature_class)[0])
