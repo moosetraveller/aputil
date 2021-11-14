@@ -30,6 +30,8 @@ FeatureClassType = TypeVar("FeatureClassType")  # for documenting reason only
 
 import arcpy
 
+__all__ = ["FeatureClassType", "count"]
+
 
 def count(feature_class: Union[str, FeatureClassType]) -> int:
     """ Returns the numbers of features in given feature class as an int value.

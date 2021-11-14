@@ -23,3 +23,5 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from .parameters import ToolParameters
+
+__all__ = ["ToolParameters"]

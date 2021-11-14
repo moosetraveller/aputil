@@ -41,6 +41,8 @@ from typing import Union, List, Dict
 
 import arcpy
 
+__all__ = ["ToolParameters"]
+
 class ToolParameters:
     """
     Wraps a list of `arcpy.Parameter`s and allows to index the parameter
