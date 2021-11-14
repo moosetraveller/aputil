@@ -86,8 +86,10 @@ class ToolParameters:
 
     def get_string(self, name: str, default_value: Union[str, None] = None) -> Union[str, None]:
         parameter = self.get(name)
-        return parameter.valueAsText if parameter else default_value
-    
+        if parameter:
+            return parameter.valueAsText
+        return default_value
+
     def get_int(self, name: str, default_value: Union[int, None] = None) -> Union[int, None]:
         """ Returns a int if the parameter's value can be converted
             into a int value. """
@@ -150,13 +152,16 @@ class ToolParameters:
         """ Returns `True` if parameter exists and the parameter's 
             value is not `None`, otherwise returns `False`. Does
             not raise an error if parameter does not exist. """
-        
         parameter = self.parameters.get(name)
         return parameter and parameter.value is not None
     
-    def get_multivalue(self, name: str) -> List[str]:
+    def get_multivalue(self, name: str, empty_list_if_no_value=True) -> List[str]:
         parameter = self.get_string(name)
-        return parameter.split(";") if parameter else None
+        if parameter:
+            return parameter.split(";")
+        if empty_list_if_no_value:
+            return list()
+        return None
 
     def clear_messages(self) -> None:
         """ Clears all messages at once. """
