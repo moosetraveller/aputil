@@ -13,6 +13,6 @@ python setup.py sdist bdist_wheel
 
 ```shell
 cd c:\projects\arcpy-util
-env\Scripts\activate
+[conda activate arcgispro-py3]
 python test.py
 ```
