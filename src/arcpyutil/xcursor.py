@@ -39,7 +39,7 @@ from typing import List, Dict, Union, Generator
 
 import arcpy
 
-__all__ = ["xcursor", "Row"]
+__all__ = ["xcursor", "XRow"]
 
 class XRow():
     """ Wraps an arcpy cursor row. """
