@@ -4,7 +4,7 @@ name. In addition, `ToolParameters` offers some helper functions.
 
 ```python
 import arcpy
-from arcpyuti.toolbox import ToolParameters
+from arcpyutil.toolbox import ToolParameters
 
 params = ToolParameters(arcpy.GetParameterInfo())
 
