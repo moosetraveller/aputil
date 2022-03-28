@@ -50,7 +50,7 @@ class ToolParameters:
     
     ```python
     import arcpy
-    from arcpyuti.toolbox import ToolParameters
+    from arcpyutil.toolbox import ToolParameters
 
     params = ToolParameters(arcpy.GetParameterInfo())
 
