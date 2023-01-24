@@ -1,5 +1,5 @@
 """
-`xcursor` is a generator wrapping an `arcpy.da.SearchCursor` using a namedtuple.
+`tcursor` is a generator wrapping an `arcpy.da.SearchCursor` using a namedtuple.
 
 ```python
 import arcpy
