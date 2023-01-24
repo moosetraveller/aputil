@@ -2,7 +2,7 @@
 GIT Repository:
 https://github.com/moosetraveller/arcpy-util
 
-Copyright (c) 2021 Thomas Zuberbuehler
+Copyright (c) 2021-2023 Thomas Zuberbuehler
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in the
@@ -23,6 +23,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
 from .xcursor import xcursor, XRow
+from .tcursor import tcursor
 from .helper import FeatureClassType, count
 
-__all__ = ["xcursor", "XRow", "FeatureClassType", "count"]
+__all__ = ["xcursor", "XRow", "tcursor", "FeatureClassType", "count"]

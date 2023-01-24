@@ -15,7 +15,7 @@ with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:
 GIT Repository:
 https://github.com/moosetraveller/arcpy-util
 
-Copyright (c) 2021 Thomas Zuberbuehler
+Copyright (c) 2021-2023 Thomas Zuberbuehler
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in the
@@ -88,9 +88,9 @@ class XRow():
         return {field_name: value for field_name, value in zip(self._fields, self.row)}  # pylint: disable=unnecessary-comprehension
 
 
-def xcursor(cursor: arcpy.da.SearchCursor) -> Generator[XRow, None, None]:
+def xcursor(cursor: arcpy.da.SearchCursor, cursor_name=None) -> Generator[XRow, None, None]:
     """
-    Generator wrapping an arcpy cursor providing XRow instances.
+    Generator wrapping an arcpy cursor providing XRow instances. A XRow instance provides
     
     ```python
     import arcpy
@@ -102,5 +102,6 @@ def xcursor(cursor: arcpy.da.SearchCursor) -> Generator[XRow, None, None]:
             print(row["FieldName"]) # instead of row[0]
     ```
     """
+
     for row in cursor:
         yield XRow(row, cursor.fields)
