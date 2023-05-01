@@ -9,7 +9,7 @@ from arcpyutil import xcursor
 feature_class = "points.shp"
 with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:
     for row in xcursor(cursor):
-        print(row["FieldName"]) # instead of row[0]
+        print(row["FieldName"])  # instead of row[0]
 ```
 
 GIT Repository:
@@ -83,10 +83,17 @@ class XRow():
             return default_value
         return value
 
-    def to_dict(self) -> Dict[str, List[any]]:
+    def to_dict(self) -> Dict[str, any]:
         """ Returns a dictionary representation. """
         return {field_name: value for field_name, value in zip(self._fields, self.row)}  # pylint: disable=unnecessary-comprehension
-
+    
+    def to_row(self, update_values: Dict[str, any] = None) -> List[any]:
+        """ Returns a copy of the row with updated values if provided. """
+        return [
+            value if not update_values or field_name not in update_values else update_values[field_name]
+            for field_name, value
+            in zip(self.fields, self.row)
+        ]
 
 def xcursor(cursor: arcpy.da.SearchCursor, cursor_name=None) -> Generator[XRow, None, None]:
     """

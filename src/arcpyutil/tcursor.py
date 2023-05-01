@@ -8,7 +8,7 @@ from arcpyutil import tcursor
 feature_class = "points.shp"
 with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:
     for row in tcursor(cursor):
-        print(row.FieldName) # instead of row[0]
+        print(row.FieldName)  # instead of row[0]
 ```
 
 GIT Repository:
@@ -55,7 +55,7 @@ def tcursor(cursor: arcpy.da.SearchCursor, tuple_name=None) -> Generator[Tuple, 
     feature_class = "points.shp"
     with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:
         for row in tcursor(cursor):
-            print(row.FieldName) # instead of row[0]
+            print(row.FieldName)  # instead of row[0]
     ```
     """
 

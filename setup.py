@@ -7,7 +7,7 @@ if __name__ == "__main__":
 
     setuptools.setup(
         name="ArcPyUtil",
-        version="0.2",
+        version="0.2.1",
         author="Thomas Zuberbuehler",
         author_email="thomas.zuberbuehler@gmail.com",
         description="Collection of arcpy helper classes and functions.",
@@ -19,14 +19,15 @@ if __name__ == "__main__":
         classifiers=[
             "Programming Language :: Python",
             "Programming Language :: Python :: 3",
-            "Programming Language :: Python :: 3.6",
             "Programming Language :: Python :: 3.7",
+            "Programming Language :: Python :: 3.8",
+            "Programming Language :: Python :: 3.9",
             "Intended Audience :: Developers",
             "License :: MIT",
             "Operating System :: OS Independent",
         ],
         install_requires=[
-            "arcpy",
+            # "arcpy",
             "deprecated",
         ],
     )
