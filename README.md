@@ -22,7 +22,7 @@ Note: replace `X.X.X` with version number
 ### `xcursor`
 
 ```python
-import arcpy
+import arcpy, arcpy.da
 from arcpyutil import xcursor
 
 feature_class = "points.shp"
@@ -36,10 +36,14 @@ with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:
         print(row.get_by_index(0, "Default Value"))
 ```
 
+#### Using `to_row()`
+
+See `test/xcursor_test.py` (test `test_to_row`) for an example.
+
 ### `tcursor`
 
 ```python
-import arcpy
+import arcpy, arcpy.da
 from arcpyutil import tcursor
 
 feature_class = "points.shp"

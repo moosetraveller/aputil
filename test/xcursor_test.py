@@ -21,7 +21,7 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import arcpy
+import arcpy, arcpy.da, arcpy.management
 import unittest
 import tempfile
 
@@ -39,6 +39,7 @@ class XCursorTest(unittest.TestCase):
         self.temp = None
         self.geodatabase = None
         self.feature_class = None
+        self.updated_feature_class = None
 
     def setUp(self):
 
@@ -53,6 +54,13 @@ class XCursorTest(unittest.TestCase):
         with arcpy.da.InsertCursor(self.feature_class, XCursorTest.FIELDS) as cursor:
             for index in range(0, 25):
                 cursor.insertRow((str(index), "Test", None, "Test {}".format(index)))
+
+        self.updated_feature_class = arcpy.management.CreateFeatureclass(
+            self.geodatabase, 
+            "Test2",
+            template=self.feature_class,
+            spatial_reference=arcpy.Describe(self.feature_class).spatialReference
+        )
 
     def tearDown(self):
 
@@ -84,11 +92,33 @@ class XCursorTest(unittest.TestCase):
                 self.assertEqual("1234", row.get("Column3", "1234"))
                 self.assertEqual("1234", row.get_by_index(2, "1234"))
 
+    def test_to_row(self):
+        """ Tests the to_row method. """
+        
+        with arcpy.da.SearchCursor(self.feature_class, XCursorTest.FIELDS) as input_cursor:
+            with arcpy.da.InsertCursor(self.updated_feature_class, XCursorTest.FIELDS) as output_cursor:
+                for row in xcursor(input_cursor):
+                    if int(row["Column1"]) % 2 == 0:
+                        output_cursor.insertRow(row.to_row({
+                            "Column2": "Test 2"
+                        }))
+                    else:
+                        output_cursor.insertRow(row.to_row())
+        
+        with arcpy.da.SearchCursor(self.updated_feature_class, XCursorTest.FIELDS) as cursor:
+
+            for index, row in enumerate(xcursor(cursor)):
+
+                if index % 2 == 0:
+                    self.assertEqual(row["Column2"], "Test 2")
+                else:
+                    self.assertEqual(row["Column2"], "Test")
 
 def run_tests():
 
     suite = unittest.TestSuite()
     suite.addTest(XCursorTest("test"))
+    suite.addTest(XCursorTest("test_to_row"))
 
     runner = unittest.TextTestRunner()
     runner.run(suite)
