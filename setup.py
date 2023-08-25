@@ -7,7 +7,7 @@ if __name__ == "__main__":
 
     setuptools.setup(
         name="ArcPyUtil",
-        version="0.3.1",
+        version="0.4",
         author="Thomas Zuberbuehler",
         author_email="thomas.zuberbuehler@gmail.com",
         description="Collection of arcpy helper classes and functions.",

@@ -1,10 +1,10 @@
 """
-Various helper functions. For `count()` use `from arcpyutil.fc import count`.
+Various typings.
 
 GIT Repository:
 https://github.com/moosetraveller/arcpy-util
 
-Copyright (c) 2021-2023 Thomas Zuberbuehler
+Copyright (c) 2023 Thomas Zuberbuehler
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in the
@@ -24,7 +24,8 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .typings import FeatureClassType  # backward compatibility
-from .fc import count  # backward compatibility
+from typing import TypeVar
 
-__all__ = ["FeatureClassType", "count"]
+FeatureClassType = TypeVar("FeatureClassType")  # for documenting reason only
+
+__all__ = ["FeatureClassType"]

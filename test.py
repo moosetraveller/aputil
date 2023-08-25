@@ -2,6 +2,7 @@ import test.xcursor_test as xcursor_test
 import test.tcursor_test as tcursor_test
 import test.toolbox.parameters_test as parameters_test
 import test.helper_test as helper_test
+import test.fc_test as fc_test
 
 
 if __name__ == "__main__":
@@ -10,3 +11,4 @@ if __name__ == "__main__":
     tcursor_test.run_tests()
     parameters_test.run_tests()
     helper_test.run_tests()
+    fc_test.run_tests()

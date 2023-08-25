@@ -24,6 +24,6 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 from .xcursor import xcursor, XRow
 from .tcursor import tcursor
-from .helper import FeatureClassType, count
+from .fc import count, use_memory
 
-__all__ = ["xcursor", "XRow", "tcursor", "FeatureClassType", "count"]
+__all__ = ["xcursor", "XRow", "tcursor", "count", "use_memory"]

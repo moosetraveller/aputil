@@ -1,7 +1,7 @@
 """
-Unittest for `arcpyutil.helper`.
+Unittest for `arcpyutil.fc`.
 
-Copyright (c) 2021-2023 Thomas Zuberbuehler
+Copyright (c) 2023 Thomas Zuberbuehler
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in the
@@ -25,9 +25,9 @@ import arcpy
 import unittest
 import tempfile
 
-from src.arcpyutil import count
+from src.arcpyutil import count, use_memory
 
-class HelperTest(unittest.TestCase):
+class FcTest(unittest.TestCase):
     """ Unit test to validate functionality of `ToolParameters`. """
 
     FIELDS = ["Column1", "Column2", "Column3", "Column4"]
@@ -49,10 +49,10 @@ class HelperTest(unittest.TestCase):
         self.geodatabase = arcpy.management.CreateFileGDB(self.temp.name, "test.gdb")
         self.feature_class = arcpy.management.CreateFeatureclass(self.geodatabase, "Test")
 
-        for field in HelperTest.FIELDS:
+        for field in FcTest.FIELDS:
             arcpy.management.AddField(self.feature_class, field, "TEXT")
 
-        with arcpy.da.InsertCursor(self.feature_class, HelperTest.FIELDS) as cursor:
+        with arcpy.da.InsertCursor(self.feature_class, FcTest.FIELDS) as cursor:
             for index in range(0, self.count):
                 cursor.insertRow((str(index), "Test", None, "Test {}".format(index)))
 
@@ -64,13 +64,31 @@ class HelperTest(unittest.TestCase):
         self.temp.cleanup()
 
     def test_count(self):
+
         self.assertEqual(count(self.feature_class), self.count)
+
+    def test_use_memory(self):
+
+        with use_memory() as copied:
+
+            self.assertFalse(arcpy.Exists(copied))
+            arcpy.management.CopyFeatures(self.feature_class, copied)
+            self.assertTrue(arcpy.Exists(copied))
+
+        self.assertFalse(arcpy.Exists(copied))
+
+        name = "test"
+
+        with use_memory(name) as test:
+
+            self.assertEqual(fr"memory\{name}", test)
 
 
 def run_tests():
 
     suite = unittest.TestSuite()
-    suite.addTest(HelperTest("test_count"))  # testing for backward compatibility
+    suite.addTest(FcTest("test_count"))
+    suite.addTest(FcTest("test_use_memory"))
 
     runner = unittest.TextTestRunner()
     runner.run(suite)
