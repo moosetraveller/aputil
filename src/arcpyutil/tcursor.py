@@ -59,7 +59,7 @@ def tcursor(cursor: arcpy.da.SearchCursor, tuple_name=None) -> Generator[Tuple, 
     ```
     """
 
-    tuple_name = tuple_name if tuple_name else f"tcursor_{uuid.uuid4().hex}"
+    tuple_name = tuple_name or f"tcursor_{uuid.uuid4().hex}"
     tcursor_tuple = namedtuple(tuple_name, cursor.fields)
 
     for row in cursor:

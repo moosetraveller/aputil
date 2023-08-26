@@ -72,9 +72,8 @@ class XCursorTest(unittest.TestCase):
     def test(self):
         """ Tests the xcursor generator. """
 
-        expected_rows = []
         with arcpy.da.SearchCursor(self.feature_class, XCursorTest.FIELDS) as cursor:
-            expected_rows = [row for row in cursor][:]
+            expected_rows = [row for row in cursor].copy()
 
         with arcpy.da.SearchCursor(self.feature_class, XCursorTest.FIELDS) as cursor:
 

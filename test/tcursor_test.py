@@ -64,9 +64,8 @@ class TCursorTest(unittest.TestCase):
     def test(self):
         """ Tests the tcursor generator. """
 
-        expected_rows = []
         with arcpy.da.SearchCursor(self.feature_class, TCursorTest.FIELDS) as cursor:
-            expected_rows = [row for row in cursor][:]
+            expected_rows = [row for row in cursor].copy()
 
         with arcpy.da.SearchCursor(self.feature_class, TCursorTest.FIELDS) as cursor:
 

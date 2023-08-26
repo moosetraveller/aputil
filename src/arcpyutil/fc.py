@@ -58,7 +58,7 @@ __all__ = ["count", "use_memory"]
 def use_memory(name: str = None) -> str:
 
     # random name if no name is given
-    name = name if name else rf"memory\fc_{uuid.uuid4().hex}"
+    name = name or rf"memory\fc_{uuid.uuid4().hex}"
 
     # if name is given, make sure that it starts with "memory\"
     name = name if name.startswith("memory\\") else rf"memory\{name}"

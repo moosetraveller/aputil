@@ -140,10 +140,10 @@ class ToolParameters:
 
         if isinstance(value, (str, int)):
             
-            if value == 1 or value.lower() in ["true", "checked", "1"]:
+            if value == 1 or value.lower() in ("true", "checked", "1"):
                 return True
 
-            if value == 0 or value.lower() in ["false", "unchecked", "0"]:
+            if value == 0 or value.lower() in ("false", "unchecked", "0"):
                 return False
 
         if not self.suppress_errors:
@@ -162,7 +162,7 @@ class ToolParameters:
         if parameter:
             return parameter.split(";")
         if empty_list_if_no_value:
-            return list()
+            return []
         return None
 
     def clear_messages(self) -> None:
