@@ -38,7 +38,7 @@ jobs:
     - name: Test (skipped, need to be run manually on local machine with installed ArcGIS Pro)
       run: |
         # cannot test source code with Github since arcpy is not available
-    #- name: Distribution
-    #  run: |
-    #    # create distribution
-    #    python setup.py sdist bdist_wheel
+    # - name: Distribution
+    #   run: |
+    #     # create distribution
+    #     python setup.py sdist bdist_wheel
