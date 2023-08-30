@@ -1,32 +1,25 @@
-# ArcPyUtil
+# APUtil
 
-Utility classes and functions for arcpy
-
-## Create Distribution
-
-```shell=
-cd c:\projects\arcpy-util
-python setup.py sdist bdist_wheel
-```
+Utility classes and functions for arcpy. APUtil stands for **A**rc**P**y and **UTIL**ity.
 
 ## Install 
 
 ```shell
-python -m pip install ArcPyUtil-X.X.X-py3-none-any.whl
+python -m pip install aputil
 ```
 
-Note: replace `X.X.X` with version number
+Note: Future releases are published on PyPi.
 
 ## Example
 
-### `arcpyutil.xcursor`
+### `aputil.xcursor`
 
 ### Using `xcursor(cursor)`
 
 ```python
 import arcpy, arcpy.da
 
-from arcpyutil import xcursor
+from aputil import xcursor
 
 feature_class = "points.shp"
 
@@ -45,14 +38,14 @@ with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:
 
 See `test/xcursor_test.py` (test `test_to_row`) for an example.
 
-### `arcpyutil.tcursor`
+### `aputil.tcursor`
 
 ### Using `tcursor(cursor)`
 
 ```python
 import arcpy, arcpy.da
 
-from arcpyutil import tcursor
+from aputil import tcursor
 
 feature_class = "points.shp"
 
@@ -63,14 +56,14 @@ with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:
         print(row.FieldName)  # instead of row[0]
 ```
 
-### `arcpyutil.fc`
+### `aputil.fc`
 
 #### Using `use_memory()`
 
 ```python
 import arcpy, arcpy.management
 
-from arcpyutil import fc
+from aputil import fc
 
 arcpy.env.workspace = r"c:\data"
 
@@ -88,19 +81,19 @@ print(arcpy.Exists(copied))  # false
 ```python
 import arcpy
 
-from arcpyutil import fc
+from aputil import fc
 
 record_count = fc.count(r"c:\data\buildings.shp")
 
 print(record_count)
 ```
 
-### `arcpyutil.typings`
+### `aputil.typings`
 
 ```python
 import arcpy, arcpy.management
 
-from arcpyutil.typings import FeatureClassType
+from aputil.typings import FeatureClassType
 
 def create_feature_class() -> FeatureClassType:
     return arcpy.management.CreateFeatureclass(r"c:\temp", "test.shp")
@@ -111,7 +104,7 @@ print(create_feature_class())
 ## Run Unit Tests
 
 ```shell
-cd c:\projects\arcpy-util
+cd c:\projects\aputil
 [conda activate arcgispro-py3]
 python test.py
 ```

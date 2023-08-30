@@ -1,5 +1,5 @@
 """
-Unittest for `arcpyutil.xcursor`.
+Unittest for `aputil.xcursor`.
 
 Copyright (c) 2021-2023 Thomas Zuberbuehler
 
@@ -25,7 +25,7 @@ import arcpy, arcpy.da, arcpy.management
 import unittest
 import tempfile
 
-from src.arcpyutil import xcursor
+from src.aputil import xcursor
 
 class XCursorTest(unittest.TestCase):
     """ Unit test to validate functionality of xcursor. """

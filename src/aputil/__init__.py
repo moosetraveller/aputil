@@ -1,6 +1,6 @@
 """
 GIT Repository:
-https://github.com/moosetraveller/arcpy-util
+https://github.com/moosetraveller/aputil
 
 Copyright (c) 2021-2023 Thomas Zuberbuehler
 
@@ -26,4 +26,6 @@ from .xcursor import xcursor, XRow
 from .tcursor import tcursor
 from .fc import count, use_memory
 
-__all__ = ["xcursor", "XRow", "tcursor", "count", "use_memory"]
+__all__ = ["xcursor", "XRow", "tcursor", "count", "use_memory", "version"]
+
+VERSION = "0.4.5"

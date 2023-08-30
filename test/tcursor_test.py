@@ -1,5 +1,5 @@
 """
-Unittest for `arcpyutil.tcursor`.
+Unittest for `aputil.tcursor`.
 
 Copyright (c) 2023 Thomas Zuberbuehler
 
@@ -25,7 +25,7 @@ import arcpy
 import unittest
 import tempfile
 
-from src.arcpyutil import tcursor
+from src.aputil import tcursor
 
 class TCursorTest(unittest.TestCase):
     """ Unit test to validate functionality of tcursor. """

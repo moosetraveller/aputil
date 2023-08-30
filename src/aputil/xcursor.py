@@ -4,7 +4,7 @@ method to use field names instead of column indices.
 
 ```python
 import arcpy
-from arcpyutil import xcursor
+from aputil import xcursor
 
 feature_class = "points.shp"
 with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:
@@ -13,7 +13,7 @@ with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:
 ```
 
 GIT Repository:
-https://github.com/moosetraveller/arcpy-util
+https://github.com/moosetraveller/aputil
 
 Copyright (c) 2021-2023 Thomas Zuberbuehler
 
@@ -101,7 +101,7 @@ def xcursor(cursor: arcpy.da.SearchCursor, cursor_name=None) -> Generator[XRow, 
     
     ```python
     import arcpy
-    from arcpyutil import xcursor
+    from aputil import xcursor
 
     feature_class = "points.shp"
     with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:

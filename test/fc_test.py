@@ -1,5 +1,5 @@
 """
-Unittest for `arcpyutil.fc`.
+Unittest for `aputil.fc`.
 
 Copyright (c) 2023 Thomas Zuberbuehler
 
@@ -25,7 +25,7 @@ import arcpy
 import unittest
 import tempfile
 
-from src.arcpyutil import count, use_memory
+from src.aputil import count, use_memory
 
 class FcTest(unittest.TestCase):
     """ Unit test to validate functionality of `ToolParameters`. """

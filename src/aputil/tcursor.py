@@ -3,7 +3,7 @@
 
 ```python
 import arcpy
-from arcpyutil import tcursor
+from aputil import tcursor
 
 feature_class = "points.shp"
 with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:
@@ -12,7 +12,7 @@ with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:
 ```
 
 GIT Repository:
-https://github.com/moosetraveller/arcpy-util
+https://github.com/moosetraveller/aputil
 
 Copyright (c) 2023 Thomas Zuberbuehler
 
@@ -50,7 +50,7 @@ def tcursor(cursor: arcpy.da.SearchCursor, tuple_name=None) -> Generator[Tuple, 
     
     ```python
     import arcpy
-    from arcpyutil import tcursor
+    from aputil import tcursor
 
     feature_class = "points.shp"
     with arcpy.da.SearchCursor(feature_class, ["FieldName"]) as cursor:

@@ -1,5 +1,5 @@
 """
-Unittest for `arcpyutil.helper`.
+Unittest for `aputil.helper`.
 
 Copyright (c) 2021-2023 Thomas Zuberbuehler
 
@@ -25,7 +25,7 @@ import arcpy
 import unittest
 import tempfile
 
-from src.arcpyutil import count
+from src.aputil import count
 
 class HelperTest(unittest.TestCase):
     """ Unit test to validate functionality of `ToolParameters`. """

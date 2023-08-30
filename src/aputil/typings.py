@@ -2,7 +2,7 @@
 Various typings.
 
 GIT Repository:
-https://github.com/moosetraveller/arcpy-util
+https://github.com/moosetraveller/aputil
 
 Copyright (c) 2023 Thomas Zuberbuehler
 

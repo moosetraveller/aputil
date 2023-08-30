@@ -1,5 +1,5 @@
 """
-Unittest for `arcpyutil.toolbox.parameters`.
+Unittest for `aputil.toolbox.parameters`.
 
 Copyright (c) 2021 Thomas Zuberbuehler
 
@@ -25,7 +25,7 @@ import arcpy
 import unittest
 import tempfile
 
-from src.arcpyutil.toolbox import ToolParameters
+from src.aputil.toolbox import ToolParameters
 
 class ToolParametersTest(unittest.TestCase):
     """ Unit test to validate functionality of `ToolParameters`. """

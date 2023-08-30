@@ -4,7 +4,7 @@ name. In addition, `ToolParameters` offers some helper functions.
 
 ```python
 import arcpy
-from arcpyutil.toolbox import ToolParameters
+from aputil.toolbox import ToolParameters
 
 params = ToolParameters(arcpy.GetParameterInfo())
 
@@ -15,7 +15,7 @@ distance = params.get_float("distance")  # retrieve float
 ```
 
 GIT Repository:
-https://github.com/moosetraveller/arcpy-util
+https://github.com/moosetraveller/aputil
 
 Copyright (c) 2021 Thomas Zuberbuehler
 
@@ -50,7 +50,7 @@ class ToolParameters:
     
     ```python
     import arcpy
-    from arcpyutil.toolbox import ToolParameters
+    from aputil.toolbox import ToolParameters
 
     params = ToolParameters(arcpy.GetParameterInfo())
 

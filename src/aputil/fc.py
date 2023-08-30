@@ -7,7 +7,7 @@ when used with the `with` statement.
 
 ```python
 import arcpy
-from arcpyutil import fc
+from aputil import fc
 
 arcpy.env.workspace = r"c:\data"
 
@@ -21,7 +21,7 @@ print(arcpy.Exists(copied))  # false
 ```
 
 GIT Repository:
-https://github.com/moosetraveller/arcpy-util
+https://github.com/moosetraveller/aputil
 
 Copyright (c) 2023 Thomas Zuberbuehler
 
