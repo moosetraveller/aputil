@@ -5,5 +5,4 @@
 #    pip-compile '.\pyproject.toml'
 #
 
-arcgis
 # arcpy
