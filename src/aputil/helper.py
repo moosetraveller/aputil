@@ -24,7 +24,7 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from .typings import FeatureClassType  # backward compatibility
-from .fc import count  # backward compatibility
+from .typings import FeatureClassType  # backward compatibility, moved to aputil.typings
+from .fc import count  # backward compatibility, moved to aputil.fc
 
 __all__ = ["FeatureClassType", "count"]

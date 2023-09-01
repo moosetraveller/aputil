@@ -44,10 +44,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
 import uuid
-import arcpy
+import arcpy, arcpy.management
 
 from contextlib import contextmanager
 
+from collections.abc import Generator
 from typing import Union
 
 from .typings import FeatureClassType
@@ -55,7 +56,12 @@ from .typings import FeatureClassType
 __all__ = ["count", "use_memory"]
 
 @contextmanager
-def use_memory(name: str = None) -> str:
+def use_memory(name: str = None) -> Generator[str, None, None]:
+
+    # Context Manager typings:
+    # https://stackoverflow.com/a/70277752/42659
+    # https://adamj.eu/tech/2021/07/04/python-type-hints-how-to-type-a-context-manager
+    # https://github.com/python/typeshed/issues/2772
 
     # random name if no name is given
     name = name or rf"memory\fc_{uuid.uuid4().hex}"
@@ -68,7 +74,7 @@ def use_memory(name: str = None) -> str:
     finally:
         arcpy.management.Delete(name)
 
-def count(feature_class: Union[str, FeatureClassType]) -> int:
+def count(feature_class: FeatureClassType) -> int:
     """ Returns the numbers of features in given feature class as an int value.
         Introduced to overcome dealing with `arcpy.management.GetCount`'s
         return value of type `arcpy.arcobjects.arcobjects.Result`."""

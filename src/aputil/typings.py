@@ -26,6 +26,6 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 from typing import TypeVar
 
-FeatureClassType = TypeVar("FeatureClassType")  # for documenting reason only
+FeatureClassType = TypeVar("FeatureClassType")  # for documenting reason
 
 __all__ = ["FeatureClassType"]
