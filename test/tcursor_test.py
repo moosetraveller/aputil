@@ -21,7 +21,7 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import arcpy
+import arcpy, arcpy.da, arcpy.management
 import unittest
 import tempfile
 
@@ -45,14 +45,14 @@ class TCursorTest(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
 
         self.geodatabase = arcpy.management.CreateFileGDB(self.temp.name, "test.gdb")
-        self.feature_class = arcpy.management.CreateFeatureclass(self.geodatabase, "Test")
+        self.feature_class = arcpy.management.CreateFeatureclass(self.geodatabase, "Test", geometry_type="Point")
 
         for field in TCursorTest.FIELDS:
             arcpy.management.AddField(self.feature_class, field, "TEXT")
 
-        with arcpy.da.InsertCursor(self.feature_class, TCursorTest.FIELDS) as cursor:
+        with arcpy.da.InsertCursor(self.feature_class, ["SHAPE@", *TCursorTest.FIELDS]) as cursor:
             for index in range(0, 25):
-                cursor.insertRow((str(index), "Test", None, "Test {}".format(index)))
+                cursor.insertRow((arcpy.Point(1, 2), str(index), "Test", None, "Test {}".format(index)))
 
     def tearDown(self):
 
@@ -80,6 +80,15 @@ class TCursorTest(unittest.TestCase):
 
                 self.assertIsNone(row.Column3)
 
+        with arcpy.da.SearchCursor(self.feature_class, ["SHAPE@XY", "SHAPE@", "SHAPE@WKT"]) as cursor:
+
+            first = next(tcursor(cursor))
+
+            self.assertIsNotNone(first.SHAPE_)
+            self.assertAlmostEqual(first.SHAPE_XY[0], 1, places=3)
+            self.assertAlmostEqual(first.SHAPE_XY[1], 2, places=3)
+            self.assertIsInstance(first.SHAPE_WKT, str)
+    
 
 def run_tests():
 
