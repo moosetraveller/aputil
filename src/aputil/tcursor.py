@@ -36,13 +36,23 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import uuid
 
-from typing import Generator, Tuple
+from collections.abc import Generator
+from typing import Tuple
 
 from collections import namedtuple
 
-import arcpy
+import arcpy, arcpy.da
 
 __all__ = ["tcursor"]
+
+
+def __replace_shape_field_name(field_name: str) -> str:
+
+    if "SHAPE@" in field_name:
+        return field_name.replace("@", "_")
+    
+    return field_name
+
 
 def tcursor(cursor: arcpy.da.SearchCursor, tuple_name=None) -> Generator[Tuple, None, None]:
     """
@@ -57,10 +67,26 @@ def tcursor(cursor: arcpy.da.SearchCursor, tuple_name=None) -> Generator[Tuple, 
         for row in tcursor(cursor):
             print(row.FieldName)  # instead of row[0]
     ```
+
+    **Note:** `SHAPE@` is `SHAPE_`, `SHAPE@XY` is `SHAPE_XY`, `SHAPE@WKT` is `SHAPE_WKT`
+    and so on. For example:
+    
+    ```python
+    import arcpy
+    from aputil import tcursor
+
+    feature_class = "points.shp"
+    with arcpy.da.SearchCursor(feature_class, ["SHAPE@", "FieldName"]) as cursor:
+        for row in tcursor(cursor):
+            print(row.SHAPE_)  # instead of row[0]
+    ```
     """
 
     tuple_name = tuple_name or f"tcursor_{uuid.uuid4().hex}"
-    tcursor_tuple = namedtuple(tuple_name, cursor.fields)
+
+    fields = map(__replace_shape_field_name, cursor.fields)
+
+    tcursor_tuple = namedtuple(tuple_name, fields)
 
     for row in cursor:
         yield tcursor_tuple(*row)
