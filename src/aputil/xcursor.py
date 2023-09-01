@@ -35,9 +35,10 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from typing import List, Dict, Union, Generator
+from collections.abc import Generator
+from typing import List, Dict, Union
 
-import arcpy
+import arcpy, arcpy.da
 
 __all__ = ["xcursor", "XRow"]
 
@@ -64,7 +65,7 @@ class XRow():
         return a default value when the field's value is None.
         """
         if field_name is None or field_name.upper() not in self._fields:
-            raise Exception("Field {} does not exist.".format(field_name))
+            raise KeyError("Field {} does not exist.".format(field_name))
         value = self.row[self._fields[field_name.upper()]]
         if not value:
             return default_value
@@ -77,7 +78,7 @@ class XRow():
         return a default value when the field's value is None.
         """
         if index >= len(self.row):
-            raise Exception("Index {} is out of range.".format(index))
+            raise IndexError("Index {} is out of range.".format(index))
         value = self.row[index]
         if not value:
             return default_value
@@ -95,7 +96,7 @@ class XRow():
             in zip(self.fields, self.row)
         ]
 
-def xcursor(cursor: arcpy.da.SearchCursor, cursor_name=None) -> Generator[XRow, None, None]:
+def xcursor(cursor: arcpy.da.SearchCursor) -> Generator[XRow, None, None]:
     """
     Generator wrapping an arcpy cursor providing XRow instances. A XRow instance provides
     
