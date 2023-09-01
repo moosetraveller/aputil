@@ -77,7 +77,7 @@ class ToolParameters:
     def get(self, name: str) -> Union[arcpy.Parameter, None]:
         parameter = self.parameters.get(name)
         if not parameter and not self.suppress_errors:
-            raise IndexError(f"Parameter with name {name} does not exist.")
+            raise KeyError(f"Parameter with name {name} does not exist.")
         return parameter
 
     def get_params(self) -> List[arcpy.Parameter]:
@@ -138,12 +138,12 @@ class ToolParameters:
         if isinstance(value, bool):
             return value
 
-        if isinstance(value, (str, int)):
+        if isinstance(value, (str, int, float)):
             
-            if value == 1 or value.lower() in ("true", "checked", "1"):
+            if str(value).lower() in ("true", "checked", "1", "1.0"):
                 return True
 
-            if value == 0 or value.lower() in ("false", "unchecked", "0"):
+            if str(value).lower() in ("false", "unchecked", "0", "0.0"):
                 return False
 
         if not self.suppress_errors:

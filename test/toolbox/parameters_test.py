@@ -118,7 +118,7 @@ class ToolParametersTest(unittest.TestCase):
     def test_errors(self):
         
         params = ToolParameters(self.parameter_info, False)
-        self.assertRaises(IndexError, params.get, "foo")
+        self.assertRaises(KeyError, params.get, "foo")
         self.assertIsNotNone(params.get("count"))
         self.assertRaises(ValueError, params.get_bool, "feature_class")
         self.assertRaises(ValueError, params.get_int, "feature_class")
