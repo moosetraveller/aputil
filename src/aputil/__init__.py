@@ -28,4 +28,4 @@ from .fc import count, use_memory
 
 __all__ = ["xcursor", "XRow", "tcursor", "count", "use_memory", "version"]
 
-VERSION = "0.4.5.2"
+VERSION = "0.4.6"
