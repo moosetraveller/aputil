@@ -157,7 +157,7 @@ class ToolParameters:
         parameter = self.parameters.get(name)
         return parameter and parameter.value is not None
     
-    def get_multivalue(self, name: str, empty_list_if_no_value=True) -> List[str]:
+    def get_multivalue(self, name: str, empty_list_if_no_value=True) -> Union[List[str], None]:
         parameter = self.get_string(name)
         if parameter:
             return parameter.split(";")
