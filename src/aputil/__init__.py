@@ -26,6 +26,6 @@ from .xcursor import xcursor, XRow
 from .tcursor import tcursor
 from .fc import count, use_memory
 
-__all__ = ["xcursor", "XRow", "tcursor", "count", "use_memory", "version"]
+__all__ = ["xcursor", "XRow", "tcursor", "count", "use_memory", "VERSION"]
 
 VERSION = "0.4.6"
